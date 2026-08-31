@@ -119,7 +119,7 @@ fun corrigerPoids(c: Collecte, nouveauPoidsKg: Double): Collecte =
  *   prixEstime(collectes[4]) == null        (litchi : prix non fixé)
  */
 fun prixEstime(c: Collecte): Double? =
-    c.produit.prixKg?.let { it * c.poidsKg }
+    c.produit.prixKg?.let { it * c.poidsKg } ?: null
 
 /**
  * TROU n°3 — when.
@@ -145,9 +145,8 @@ fun categorieDePoids(c: Collecte): String {
  *   {Vanille=18.5, Café=42.0, Girofle=15.0, Litchi=55.0}
  * Indice : groupBy, puis mapValues + sumOf — en une expression.
  */
-fun totalParProduit(liste: List<Collecte>): Map<String, Double> {
-    TODO("Trou n°4 — groupBy + mapValues/sumOf")
-}
+fun totalParProduit(liste: List<Collecte>): Map<String, Double> =
+    liste.groupBy { it.produit.nom }.mapValues { it.value.sumOf { it.poidsKg } }
 
 /**
  * TROU n°5 — collections : tri filtré.
@@ -157,7 +156,8 @@ fun totalParProduit(liste: List<Collecte>): Map<String, Double> {
  * prixEstime (trou n°2).
  */
 fun collectesValorisables(liste: List<Collecte>): List<Collecte> {
-    TODO("Trou n°5 — filter + sortedByDescending")
+    return liste.filter{ prixEstime(it) != null }
+        .sortedByDescending { prixEstime(it) }
 }
 
 /**
@@ -207,5 +207,5 @@ fun main() {
     println("P4: " + formatAriary(1_250_000.0))
 
     // Une fois les trous complétés, décommentez :
-    // verifierTrous()
+    verifierTrous()
 }
