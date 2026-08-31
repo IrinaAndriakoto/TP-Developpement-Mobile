@@ -26,6 +26,8 @@
 // LE DOMAINE : une coopérative agricole malgache
 // ----------------------------------------------------------------------------
 
+
+//A-1
 data class Produit(
     val code: String,
     val nom: String,
@@ -49,6 +51,7 @@ data class Collecte(
 // JEU DE DONNÉES (fourni)
 // ----------------------------------------------------------------------------
 
+//A-1
 val vanille = Produit("VAN", "Vanille", 250_000.0)
 val cafe    = Produit("CAF", "Café", 12_000.0)
 val girofle = Produit("GIR", "Girofle", 38_000.0)
@@ -83,12 +86,14 @@ fun formatAriary(montant: Double): String {
 }
 
 /** Résumé d'une collecte, avec gestion du prix éventuellement absent. */
+//A-3
 fun Collecte.resume(): String {
     val valeur = produit.prixKg?.let { formatAriary(poidsKg * it) } ?: "prix non fixé"
     return "$poidsKg kg de ${produit.nom} (${producteur.nom}) — $valeur"
 }
 
 /** Les noms des produits collectés, sans doublon, triés. */
+//A-2
 fun produitsCollectes(liste: List<Collecte>): List<String> =
     liste.map { it.produit.nom }.distinct().sorted()
 
@@ -166,7 +171,10 @@ fun collectesValorisables(liste: List<Collecte>): List<Collecte> {
  * est vide). Indice : groupBy + maxByOrNull.
  */
 fun producteurLePlusActif(liste: List<Collecte>): Producteur? {
-    TODO("Bonus ★ — groupBy + maxByOrNull")
+    return liste
+        .groupBy { it.producteur }
+        .maxByOrNull { (_, collectes) -> collectes.sumOf { it.poidsKg } }
+        ?.key
 }
 
 // ----------------------------------------------------------------------------
@@ -183,8 +191,8 @@ fun verifierTrous() {
     println("T3  " + collectes[5].poidsKg + " kg -> " + categorieDePoids(collectes[5]) + "   (attendu : moyenne)")
     println("T4  " + totalParProduit(collectes) + "   (attendu : {Vanille=18.5, Café=42.0, Girofle=15.0, Litchi=55.0})")
     println("T5  " + collectesValorisables(collectes).map { it.resume() })
-    // Bonus :
-    // println("★   " + producteurLePlusActif(collectes)?.nom)
+//     Bonus :
+     println("★   " + producteurLePlusActif(collectes)?.nom)
 }
 
 // ----------------------------------------------------------------------------
@@ -195,6 +203,7 @@ fun main() {
     println("=== Coopérative — collectes du 01 au 03 août 2026 ===")
 
     // P1 — Prédisez la sortie exacte :
+    //A-1
     println("P1: " + produitsCollectes(collectes))
 
     // P2 — Prédisez la sortie exacte (attention au litchi) :
