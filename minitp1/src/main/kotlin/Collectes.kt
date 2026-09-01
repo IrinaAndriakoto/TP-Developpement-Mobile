@@ -207,7 +207,7 @@ fun main() {
     println("P1: " + produitsCollectes(collectes))
 
     // P2 — Prédisez la sortie exacte (attention au litchi) :
-    println("P2: " + collectes[3].resume())
+    println("P2: " + collectes[4].resume())
 
     // P3 — Prédisez la sortie exacte :
     println("P3: " + collectesDuVillage(collectes, "Ambodivoara").size + " collectes à Ambodivoara")
