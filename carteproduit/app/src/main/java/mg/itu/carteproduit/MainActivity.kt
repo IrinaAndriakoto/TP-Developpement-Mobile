@@ -103,7 +103,6 @@ fun ProduitCard(produit: Produit) {
                     style = MaterialTheme.typography.bodyLarge,
                 )
             }
-
             // Commandes à droite
             Column(horizontalAlignment = Alignment.End) {
                 Text("Quantité : $quantite kg")
