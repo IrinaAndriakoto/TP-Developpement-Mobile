@@ -81,27 +81,27 @@ fun AppNavigation() {
                 produits = produits,
                 onProduitClick = { produitId ->
                     // TODO 2 : naviguer vers le détail du produit cliqué.
-                    // Une ligne :  navController.navigate("detail/$produitId")
+                    navController.navigate("detail/$produitId")
                 }
             )
         }
 
         // TODO 1 : déclarer la route du détail, avec son argument produitId.
         // Modèle :
-        //   composable("detail/{produitId}") { backStackEntry ->
-        //       val id = backStackEntry.arguments
-        //           ?.getString("produitId")?.toIntOrNull()
-        //       val produit = produits.find { it.id == id }
-        //       if (produit != null) {
-        //           EcranDetail(
-        //               produit = produit,
-        //               onRetour = {
+           composable("detail/{produitId}") { backStackEntry ->
+               val id = backStackEntry.arguments
+                   ?.getString("produitId")?.toIntOrNull()
+               val produit = produits.find { it.id == id }
+               if (produit != null) {
+                   EcranDetail(
+                       produit = produit,
+                       onRetour = {
         //                   // TODO 3 : revenir à la liste (dépiler).
-        //                   // Une ligne :  navController.popBackStack()
-        //               }
-        //           )
-        //       }
-        //   }
+                           navController.popBackStack()
+                       }
+                   )
+               }
+           }
     }
 }
 
