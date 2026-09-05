@@ -1,10 +1,22 @@
-/carteproduit/build/
-/carteproduit/.gradle/
-/cycledevie/build/
-/cycledevie/.gradle/
-/minitp1/build/
-/minitp1/.gradle/
-/minitp2/build/
-/minitp2/.gradle/
-/listedetail/build/
-/listedetail/.gradle/
+# --- Gradle / Android ---
+
+# Dossiers de compilation (a n'importe quel niveau)
+**/build/
+build/
+
+# Cache Gradle
+**/.gradle/
+
+# IDE (Android Studio / IntelliJ)
+**/.idea/
+**/.fleet/
+**/.kotlin/
+**/.cxx/
+
+# Configuration locale (chemin SDK specifique a la machine)
+**/local.properties
+
+# Fichiers OS
+.DS_Store
+Thumbs.db
+
